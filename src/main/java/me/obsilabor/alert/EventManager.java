@@ -21,11 +21,10 @@ public class EventManager {
                     continue;
                 }
                 if(method.getParameterCount() != 1) {
-                    System.out.println("[ALERT]: @Subscribe method with more or less then 1 arguments can't be invoked");
+                    System.out.println("[ALERT]: @Subscribe method with more or less then 1 arguments can't be invoked: " + method.getName());
                     continue;
                 }
                 if(!Arrays.asList(method.getParameterTypes()).contains(event.getClass())) {
-                    System.out.println("[ALERT]: @Subscribe method without event parameter");
                     continue;
                 }
                 try {
