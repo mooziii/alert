@@ -8,7 +8,7 @@ Alert is a really simple and blazing fast event listening utility.
 
 Currently the project is not available on maven central, so you have to build it yourself using `./gradlew publishToMavenLocal` 
 Then, add your local reposity using `mavenLocal()` to your repository scope.
-Now you can add the dependency using `me.obsilabor:alert:1.0.0`
+Now you can add the dependency using `me.obsilabor:alert:1.0.2`
 
 ### Create a event
 
