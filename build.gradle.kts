@@ -3,6 +3,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
+    kotlin("jvm") version "1.6.20"
 }
 
 group = "me.obsilabor"
@@ -15,6 +16,9 @@ repositories {
 tasks {
     compileJava {
         options.release.set(11)
+    }
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
     }
 }
 
