@@ -11,7 +11,6 @@ public @interface Subscribe {
 
 
     /**
-     *
      * 1 - lowest
      * 5 - highest
      */
