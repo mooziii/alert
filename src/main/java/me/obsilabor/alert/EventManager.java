@@ -1,5 +1,6 @@
 package me.obsilabor.alert;
 
+import me.obsilabor.alert.kotlin.KotlinListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -8,11 +9,17 @@ import java.util.List;
 
 public class EventManager {
 
-    private static final List<Listener> listeners = new ArrayList<>();
+    private static final List<Object> listeners = new ArrayList<>();
 
     public static  <T extends Event> void callEvent(T event) {
-        for (Listener listener : listeners) {
-            if(!listener.isActive()) {
+        for (Object listener : listeners) {
+            try {
+                Method method = listener.getClass().getMethod("isActive");
+                boolean isActive = (boolean) method.invoke(listener);
+                if(!isActive) {
+                    continue;
+                }
+            } catch (Exception ignored) {
                 continue;
             }
             for (Method method : listener.getClass().getDeclaredMethods()) {
@@ -24,7 +31,7 @@ public class EventManager {
                     System.out.println("[ALERT]: @Subscribe method with more or less then 1 arguments can't be invoked: " + method.getName());
                     continue;
                 }
-                if(!Arrays.asList(method.getParameterTypes()).contains(event.getClass())) {
+                if(!Arrays.asList(method.getParameterTypes()).contains(event.getClass()) && !(listener instanceof KotlinListener<?>)) {
                     continue;
                 }
                 try {
@@ -36,7 +43,7 @@ public class EventManager {
         }
     }
 
-    public static void registerListener(Listener listener) {
+    public static void registerListener(Object listener) {
         listeners.add(listener);
     }
 
