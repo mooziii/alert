@@ -12,13 +12,13 @@ Now you can add the dependency
 #### Gradle (Kotlin)
 
 ```kotlin
-implementation("me.obsilabor:alert:1.0.2")
+implementation("me.obsilabor:alert:1.0.3")
 ```
 
 #### Gradle (Groovy)
 
 ```groovy
-implementation 'me.obsilabor:alert:1.0.2'
+implementation 'me.obsilabor:alert:1.0.3'
 ```
 *To shade the dependency into your jar you probably want to use the shadow gradle plugin*
 
@@ -28,10 +28,67 @@ implementation 'me.obsilabor:alert:1.0.2'
 <dependency>
     <groupId>me.obsilabor</groupId>
     <artifactId>alert</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 *For maven you probably have to use any plugin that does the same as shadow, i have no idea how maven works*
+
+## Tutorial (Kotlin)
+
+### Create a event
+
+Create a event by extending from `Event` (or if the event should be cancellable extend from `Cancellable`)
+
+Example:
+
+```kotlin
+class RabbitJumpEvent(val rabbit: Rabbit) : Cancellable() {}
+```
+
+Trigger the event using `EventManager.callEvent`. If you want to procces the event e.g. if it can be cancelled, you must store the event as a variable.
+
+Example:
+
+```kotlin
+fun handleRabbitJumping(rabbit: Rabbit) {
+    val event = RabbitJumpEvent(this)
+    EventManager.callEvent(event)
+    if(event.isCancelled) {
+        return
+    }
+    rabbit.jump()
+}
+```
+
+### Listen to a event
+
+Create a listener just by creating a new class and in the init method, you can use the listen function just like in this example:
+
+```kotlin
+class RabbitJumpListener {
+    
+    init {
+        subscribeToEvent<RabbitJumpEvent> {
+            //TODO: Do something cool :)
+        }
+    }
+}
+```
+
+*Sadly, to priorize subscriptions, you have to do it the java way.*
+
+```kotlin
+class RabbitJumpListener {
+
+    @Subscribe(priority = EventPriority.HIGHEST)
+    fun onRabbitJump(event: RabbitJumpEvent) {
+        //TODO: Do something cool :)
+    }
+}
+```
+
+
+## Tutorial (Java)
 
 ### Create a event
 
@@ -71,18 +128,10 @@ public void handleRabbitJumping(Rabbit rabbit) {
 
 ### Listen to a event
 
-Create a listener by implementing the `Listener` interface.
+Create a listener just by creating a new class and a method annotated with @Subscribe. Add the event you want to listen to as an parameter.
 
 ```java
-public class RabbitJumpListener implements Listener {
-    
-}
-```
-
-Now, create a method annotated with @Subscribe. Add the event you want to listen to as an parameter.
-
-```java
-public class RabbitJumpListener implements Listener {
+public class RabbitJumpListener {
     
     @Subscribe
     public void onRabbitJump(RabbitJumpEvent event) {
@@ -94,9 +143,9 @@ public class RabbitJumpListener implements Listener {
 *To priorize subscriptions, just set the priority value of the @Subscribe annotation*
 
 ```java
-public class RabbitJumpListener implements Listener {
+public class RabbitJumpListener {
     
-    @Subscribe(priority = 5) // 1 = lowest, 5 = highest
+    @Subscribe(priority = EventPriority.HIGHEST)
     public void onRabbitJump(RabbitJumpEvent event) {
         //TODO: Do something cool :)
     }
