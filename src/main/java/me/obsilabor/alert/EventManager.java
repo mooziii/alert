@@ -7,10 +7,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Manages all events
+ */
 public class EventManager {
 
     private static final List<Object> listeners = new ArrayList<>();
 
+    /**
+     * Calls an event and triggers all listeners
+     * @param event The event to call
+     * @param <T> Type of the event
+     */
     public static  <T extends Event> void callEvent(T event) {
         for (Object listener : listeners) {
             try {
@@ -43,6 +51,10 @@ public class EventManager {
         }
     }
 
+    /**
+     * Registers a new listener
+     * @param listener the listener to register
+     */
     public static void registerListener(Object listener) {
         listeners.add(listener);
     }
