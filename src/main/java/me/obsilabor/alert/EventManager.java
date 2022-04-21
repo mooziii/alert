@@ -37,9 +37,7 @@ public class EventManager {
                 if(!isActive) {
                     continue;
                 }
-            } catch (Exception ignored) {
-                continue;
-            }
+            } catch (Exception ignored) {}
             for (Method method : listener.getClass().getDeclaredMethods()) {
                 Subscribe subscribe = method.getAnnotation(Subscribe.class);
                 if(subscribe == null) {
