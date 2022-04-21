@@ -1,5 +1,9 @@
 package me.obsilabor.alert;
 
+/**
+ * Before 1.0.3 this represented a listener object.
+ * @deprecated No longer required
+ */
 @Deprecated(since = "1.0.3")
 public interface Listener {
 

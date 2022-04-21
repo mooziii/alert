@@ -16,6 +16,7 @@ public @interface Subscribe {
     /**
      * 1 - lowest
      * 5 - highest
+     * @return The event priority set for this listener
      */
     int priority() default EventPriority.MEDIUM;
 
