@@ -15,11 +15,21 @@ public class EventManager {
     private static final List<Object> listeners = new ArrayList<>();
 
     /**
-     * Calls an event and triggers all listeners
+     * Calls an event and triggers all listeners (without showing exceptions)
      * @param event The event to call
      * @param <T> Type of the event
      */
     public static  <T extends Event> void callEvent(T event) {
+        callEvent(event, false);
+    }
+
+    /**
+     * Calls an event and triggers all listeners
+     * @param event The event to call
+     * @param printException Whether exceptions should be printed or not
+     * @param <T> Type of the event
+     */
+    public static  <T extends Event> void callEvent(T event, boolean printException) {
         for (Object listener : listeners) {
             try {
                 Method method = listener.getClass().getMethod("isActive");
@@ -45,7 +55,9 @@ public class EventManager {
                 try {
                     method.invoke(listener, event);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+                    if(printException) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
