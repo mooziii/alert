@@ -76,6 +76,13 @@ public class EventManager {
     }
 
     /**
+     * Registers multiple listeners
+     * @param listeners the listeners to register
+     */
+    public static void registerListeners(Object... listeners) {
+        for (Object listener : listeners) {
+            registerListener(listener);
+        }
     }
 
 }
