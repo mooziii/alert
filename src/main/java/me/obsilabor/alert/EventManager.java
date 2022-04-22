@@ -72,7 +72,6 @@ public class EventManager {
         List<Method> list = priorityMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(Map.Entry::getKey).collect(Collectors.toList());
         Collections.reverse(list);
         listeners.put(listener, list);
-        System.out.println(listeners);
     }
 
     /**
