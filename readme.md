@@ -1,6 +1,6 @@
 # 🚨 alert
 
-Alert is a really simple and blazing fast event listening utility. 
+Alert is a really simple, easy to use and blazing fast event listening utility. 
 
 ## Tutorial
 
