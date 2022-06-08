@@ -87,12 +87,17 @@ class RabbitJumpListener {
         }
     }
 }
+
 ```
+
+Triggering events in kotlin is just the same as in java
+
 </details>
 
 
 <details>
     <summary>Java Tutorial</summary>
+
 ### Create a event
 
 Create a event by extending from `Event` (or if the event should be cancellable extend from `Cancellable`)
