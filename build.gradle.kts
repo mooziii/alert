@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "me.obsilabor"
-version = "1.0.5"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
@@ -61,7 +61,7 @@ publishing {
 
             pom {
                 name.set(project.name)
-                description.set("Alert is a really simple and blazing fast event listening utility. ")
+                description.set("Alert is a really simple and blazing fast event listening utility.")
 
                 developers {
                     developer {
