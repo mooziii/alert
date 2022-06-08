@@ -28,7 +28,7 @@ implementation 'me.obsilabor:alert:1.0.6'
 <dependency>
     <groupId>me.obsilabor</groupId>
     <artifactId>alert</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 *For maven you probably have to use any plugin that does the same as shadow, i have no idea how maven works*
