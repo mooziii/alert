@@ -12,13 +12,13 @@ Now you can add the dependency
 #### Gradle (Kotlin)
 
 ```kotlin
-implementation("me.obsilabor:alert:1.0.5")
+implementation("me.obsilabor:alert:1.0.6")
 ```
 
 #### Gradle (Groovy)
 
 ```groovy
-implementation 'me.obsilabor:alert:1.0.5'
+implementation 'me.obsilabor:alert:1.0.6'
 ```
 *To shade the dependency into your jar you probably want to use the shadow gradle plugin*
 
@@ -33,7 +33,8 @@ implementation 'me.obsilabor:alert:1.0.5'
 ```
 *For maven you probably have to use any plugin that does the same as shadow, i have no idea how maven works*
 
-## Tutorial (Kotlin)
+<details>
+    <summary>Kotlin Tutorial</summary>
 
 ### Create a event
 
@@ -75,21 +76,23 @@ class RabbitJumpListener {
 }
 ```
 
-*Sadly, to priorize subscriptions, you have to do it the java way.*
+*To priorize subscriptions, you can change the priority parameter.*
 
 ```kotlin
 class RabbitJumpListener {
 
-    @Subscribe(priority = EventPriority.HIGHEST)
-    fun onRabbitJump(event: RabbitJumpEvent) {
-        //TODO: Do something cool :)
+    init {
+        subscribeToEvent<RabbitJumpEvent>(priority = EventPriority.HIGHEST) {
+            //TODO: Do something cool :)
+        }
     }
 }
 ```
+</details>
 
 
-## Tutorial (Java)
-
+<details>
+    <summary>Java Tutorial</summary>
 ### Create a event
 
 Create a event by extending from `Event` (or if the event should be cancellable extend from `Cancellable`)
@@ -117,8 +120,7 @@ Example:
 
 ```java
 public void handleRabbitJumping(Rabbit rabbit) {
-    RabbitJumpEvent event = new RabbitJumpEvent(this);
-    EventManager.callEvent(event);
+    RabbitJumpEvent event = EventManager.callEvent(event);
     if(event.isCancelled()) {
         return;    
     }
@@ -151,3 +153,6 @@ public class RabbitJumpListener {
     }
 }
 ```
+</details>
+
+
