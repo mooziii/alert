@@ -8,7 +8,8 @@ import me.obsilabor.alert.Subscribe
  */
 class KotlinListener<T : Event>(
     private val isActiveCallback: () -> Boolean,
-    private val handler: (T) -> Unit
+    private val handler: (T) -> Unit,
+    private val listenerPriority: Int
 ) {
 
     /**
@@ -17,6 +18,10 @@ class KotlinListener<T : Event>(
      */
     fun isActive(): Boolean {
         return isActiveCallback.invoke()
+    }
+
+    fun getPriority(): Int {
+        return listenerPriority
     }
 
     /**

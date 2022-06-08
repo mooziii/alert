@@ -18,8 +18,8 @@ public class EventManager {
      * @param event The event to call
      * @param <T> Type of the event
      */
-    public static  <T extends Event> void callEvent(T event) {
-        callEvent(event, false);
+    public static <T extends Event> T callEvent(T event) {
+        return callEvent(event, false);
     }
 
     /**
@@ -28,7 +28,7 @@ public class EventManager {
      * @param printException Whether exceptions should be printed or not
      * @param <T> Type of the event
      */
-    public static  <T extends Event> void callEvent(T event, boolean printException) {
+    public static <T extends Event> T callEvent(T event, boolean printException) {
         for (Object listener : listeners.keySet()) {
             try {
                 Method method = listener.getClass().getMethod("isActive");
@@ -54,6 +54,7 @@ public class EventManager {
                 }
             }
         }
+        return event;
     }
 
     /**
@@ -62,12 +63,17 @@ public class EventManager {
      */
     public static void registerListener(Object listener) {
         HashMap<Method, Integer> priorityMap = new HashMap<>();
+        int globalPriority = -1;
+        try {
+            Method method = listener.getClass().getMethod("getPriority");
+            globalPriority = (int) method.invoke(listener);
+        } catch (Exception ignored) {}
         for (Method method : listener.getClass().getDeclaredMethods()) {
             Subscribe subscribe = method.getAnnotation(Subscribe.class);
             if(subscribe == null) {
                 continue;
             }
-            priorityMap.put(method, subscribe.priority());
+            priorityMap.put(method, globalPriority == -1 ? subscribe.priority() : globalPriority);
         }
         List<Method> list = priorityMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).map(Map.Entry::getKey).collect(Collectors.toList());
         Collections.reverse(list);
