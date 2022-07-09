@@ -20,7 +20,7 @@ implementation("me.obsilabor:alert:1.0.6")
 ```groovy
 implementation 'me.obsilabor:alert:1.0.6'
 ```
-*To shade the dependency into your jar you probably want to use the shadow gradle plugin*
+*To shade the dependency into your jar, you probably want to use the shadow gradle plugin*
 
 #### Maven
 
