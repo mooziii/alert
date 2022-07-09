@@ -7,7 +7,7 @@ Alert is a really simple, easy to use and blazing fast event listening utility.
 ### Add the dependency
 
 The project is available on maven central.
-Now you can add the dependency
+Just add the dependency like this:
 
 #### Gradle (Kotlin)
 
