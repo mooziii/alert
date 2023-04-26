@@ -3,6 +3,7 @@ package me.obsilabor.alert;
 /**
  * Class that contains all common event priorities.
  */
+@SuppressWarnings("unused")
 public class EventPriority {
 
     /**

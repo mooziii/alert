@@ -3,6 +3,7 @@ package me.obsilabor.alert;
 /**
  * Represents a cancellable event
  */
+@SuppressWarnings("unused")
 public abstract class Cancellable extends Event {
 
     private boolean isCancelled = false;

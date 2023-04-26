@@ -2,15 +2,18 @@ plugins {
     java
     `java-library`
     `maven-publish`
-    signing
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.8.20"
 }
 
 group = "me.obsilabor"
-version = "1.0.6"
+version = "1.0.7"
 
 repositories {
     mavenCentral()
+}
+
+dependencies {
+    api("com.google.code.gson:gson:2.10.1")
 }
 
 tasks {
@@ -20,10 +23,6 @@ tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "11"
     }
-}
-
-signing {
-    sign(publishing.publications)
 }
 
 val jarThing by tasks.registering(Jar::class) {

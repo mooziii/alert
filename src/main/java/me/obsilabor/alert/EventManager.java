@@ -9,14 +9,15 @@ import java.util.stream.Collectors;
 /**
  * Manages all events
  */
+@SuppressWarnings("unused")
 public class EventManager {
-
     private static final HashMap<Object, List<Method>> listeners = new HashMap<>();
 
     /**
      * Calls an event and triggers all listeners (without showing exceptions)
      * @param event The event to call
      * @param <T> Type of the event
+     * @return The event instance, modified by all listeners.
      */
     public static <T extends Event> T callEvent(T event) {
         return callEvent(event, false);
@@ -27,6 +28,7 @@ public class EventManager {
      * @param event The event to call
      * @param printException Whether exceptions should be printed or not
      * @param <T> Type of the event
+     * @return The event instance, modified by all listeners.
      */
     public static <T extends Event> T callEvent(T event, boolean printException) {
         for (Object listener : listeners.keySet()) {
@@ -90,4 +92,11 @@ public class EventManager {
         }
     }
 
+    /**
+     * Unregisters a listener
+     * @param listener the listener to unregister
+     */
+    public static void unregisterListener(Object listener) {
+        listeners.remove(listener);
+    }
 }
