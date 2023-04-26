@@ -12,13 +12,13 @@ Just add the dependency like this:
 #### Gradle (Kotlin)
 
 ```kotlin
-implementation("me.obsilabor:alert:1.0.6")
+implementation("me.obsilabor:alert:1.0.7")
 ```
 
 #### Gradle (Groovy)
 
 ```groovy
-implementation 'me.obsilabor:alert:1.0.6'
+implementation 'me.obsilabor:alert:1.0.7'
 ```
 *To shade the dependency into your jar, you probably want to use the shadow gradle plugin*
 
@@ -28,7 +28,7 @@ implementation 'me.obsilabor:alert:1.0.6'
 <dependency>
     <groupId>me.obsilabor</groupId>
     <artifactId>alert</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 *For maven you probably have to use any plugin that does the same as shadow, i have no idea how maven works*
