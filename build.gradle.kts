@@ -41,7 +41,6 @@ publishing {
             maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 name = "ossrh"
                 credentials(PasswordCredentials::class) {
-
                     username = (property("ossrhUsername") ?: return@credentials) as String
                     password = (property("ossrhPassword") ?: return@credentials) as String
                 }
