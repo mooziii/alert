@@ -1,7 +1,8 @@
 plugins {
-    java
-    `java-library`
-    `maven-publish`
+    id("java-library")
+    id("java")
+    id("maven-publish")
+    id("signing")
     kotlin("jvm") version "1.8.20"
 }
 
@@ -12,8 +13,8 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    api("com.google.code.gson:gson:2.10.1")
+signing {
+    sign(publishing.publications)
 }
 
 tasks {
@@ -40,6 +41,7 @@ publishing {
             maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 name = "ossrh"
                 credentials(PasswordCredentials::class) {
+
                     username = (property("ossrhUsername") ?: return@credentials) as String
                     password = (property("ossrhPassword") ?: return@credentials) as String
                 }
