@@ -4,6 +4,7 @@ import me.obsilabor.alert.kotlin.KotlinListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("unused")
 public class EventManager {
-    private static final HashMap<Object, List<Method>> listeners = new HashMap<>();
+    private static final ConcurrentHashMap<Object, List<Method>> listeners = new ConcurrentHashMap<>();
 
     /**
      * Calls an event and triggers all listeners (without showing exceptions)
