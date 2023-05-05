@@ -12,13 +12,13 @@ Just add the dependency like this:
 #### Gradle (Kotlin)
 
 ```kotlin
-implementation("me.obsilabor:alert:1.0.7")
+implementation("me.obsilabor:alert:1.0.8")
 ```
 
 #### Gradle (Groovy)
 
 ```groovy
-implementation 'me.obsilabor:alert:1.0.7'
+implementation 'me.obsilabor:alert:1.0.8'
 ```
 *To shade the dependency into your jar, you probably want to use the shadow gradle plugin*
 
@@ -28,10 +28,10 @@ implementation 'me.obsilabor:alert:1.0.7'
 <dependency>
     <groupId>me.obsilabor</groupId>
     <artifactId>alert</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
 </dependency>
 ```
-*For maven you probably have to use any plugin that does the same as shadow, i have no idea how maven works*
+*For maven you probably have to use any plugin that does the same as shadow, I have no idea how maven works*
 
 <details>
     <summary>Kotlin Tutorial</summary>
@@ -52,8 +52,7 @@ Example:
 
 ```kotlin
 fun handleRabbitJumping(rabbit: Rabbit) {
-    val event = RabbitJumpEvent(this)
-    EventManager.callEvent(event)
+    val event = EventManager.callEvent(RabbitJumpEvent(this))
     if(event.isCancelled) {
         return
     }
@@ -76,7 +75,7 @@ class RabbitJumpListener {
 }
 ```
 
-*To priorize subscriptions, you can change the priority parameter.*
+*To prioritize subscriptions, you can change the priority parameter.*
 
 ```kotlin
 class RabbitJumpListener {
@@ -147,7 +146,7 @@ public class RabbitJumpListener {
 }
 ```
 
-*To priorize subscriptions, just set the priority value of the @Subscribe annotation*
+*To prioritize subscriptions, just set the priority value of the @Subscribe annotation*
 
 ```java
 public class RabbitJumpListener {
