@@ -51,7 +51,7 @@ public class EventManager {
                 try {
                     method.invoke(listener, event);
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    if(printException) {
+                    if (!(e.getCause() instanceof ClassCastException) && printException) {
                         e.printStackTrace();
                     }
                 }
